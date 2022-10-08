@@ -8,7 +8,7 @@ public class App {
 
     //todo Task 1
     public void largestNumber(){
-       /* Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
         double max = 0;
         double input = 10e10;
@@ -18,7 +18,7 @@ public class App {
             System.out.print("Number " + count + ": ");
             input = scan.nextDouble();
             if(input < 0 && count == 1){
-                System.out.println("No number entered");
+                System.out.println("No number entered.");
                 max = input;
                 break;
             }
@@ -27,13 +27,13 @@ public class App {
         }
         if(max >= 0){
             System.out.println("The largest number is " + String.format("%.2f",max));
-        }*/
+        }
     }
 
     //todo Task 2
     public void stairs(){
         // input your solution here
-        /*Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         System.out.print("n: ");
         int numberOfRows = scan.nextInt();
         if(numberOfRows <= 0){
@@ -48,13 +48,13 @@ public class App {
                 }
                 System.out.println(output);
             }
-        }*/
+        }
     }
 
     //todo Task 3
     public void printPyramid(){
         // input your solution here
-       /* int numberOfRows = 6;
+        int numberOfRows = 6;
         for (int i = 1; i <= 6; i++) {
             String output = "";
             for (int j = 1; j <= 11; j++) {
@@ -62,13 +62,13 @@ public class App {
                 if(j > numberOfRows - i && j < 2*numberOfRows - (numberOfRows - i)) output += "*";
             }
             System.out.println(output);
-        }*/
+        }
     }
 
     //todo Task 4
     public void printRhombus(){
         // input your solution here
-       /* Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
         System.out.print("h: ");
         int numberOfRows = scan.nextInt();
@@ -76,12 +76,17 @@ public class App {
         String input = scan.next();
         char c = input.charAt(0);
 
+        if(numberOfRows%2 != 1){
+            System.out.println("Invalid number!");
+            return;
+        }
+
         int count = numberOfRows / 2 - 1;
 
-        for (int i = 1; i <= numberOfRows/2 ; i++) {
+        for (int i = 1; i <= numberOfRows/2 + 1 ; i++) {
             String output = "";
 
-            for (int j = 0; j < count; j++) {
+            for (int j = 0; j <= count; j++) {
                 output += " ";
             }
             for (int j = count + 1; j < numberOfRows - (count + 1); j++) {
@@ -95,13 +100,13 @@ public class App {
             count--;
         }
         count = 1;
-        for (int i = 1; i <= numberOfRows/2 ; i++) {
+        for (int i = 1; i <= numberOfRows/2; i++) {
             String output = "";
 
             for (int j = 0; j < count; j++) {
                 output += " ";
             }
-            for (int j = count + 1; j < numberOfRows - (count + 1); j++) {
+            for (int j = count; j <= numberOfRows - (count + 1); j++) {
                 if((char)(c - (numberOfRows/2 - j)) <= c) {
                     output += (char) (c - (numberOfRows / 2 - j));
                 } else {
@@ -110,38 +115,40 @@ public class App {
             }
             System.out.println(output);
             count++;
-        }*/
+        }
     }
 
     //todo Task 5
     public void marks(){
         // input your solution here
-       /* Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-        double average = 0;
+        double sum = 0;
         double input;
         int count = 1;
         int countFive = 0;
-        int countGoodInput = 1;
+        double countGoodInput = 0;
 
         while(true){
             System.out.print("Mark " + count + ": ");
             input = scan.nextDouble();
 
             if(input < 0 || input > 5){
-                System.out.println("Invalid Input");
+                System.out.println("Invalid mark!");
+                count--;
             }
             else if (input != 0){
-                average = (average + input) / countGoodInput;
+                sum += input;
                 countGoodInput++;
-                if(input == 5){ countFive++;}
+                if(input == 5) countFive++;
             } else {
                 break;
             }
             count++;
         }
-        System.out.println("Average: " + String.format("%.2f",average));
-        System.out.println("Negative marks: " + countFive);*/
+        if(countGoodInput == 0) countGoodInput++;
+        System.out.println("Average: " + String.format("%.2f",sum/countGoodInput));
+        System.out.println("Negative marks: " + countFive);
     }
 
     //todo Task 6
@@ -150,18 +157,16 @@ public class App {
         Scanner scan = new Scanner(System.in);
         System.out.print("n: ");
         int input = scan.nextInt();
-        int[] digits = new int[32];
 
-        while(true) {
-            int count = 0;
+        while(true){
+            int sum = 0;
+
             while (input > 0) {
-                digits[count] = input / 10;
+                double digit = input%10.0;
+                sum += Math.pow(digit,2);
                 input /= 10;
-                count++;
             }
-            for (int digit : digits) {
-                input += Math.pow(digit,2);
-            }
+            input = sum;
             if(input == 1){
                 System.out.println("Happy number!");
                 break;
@@ -176,7 +181,7 @@ public class App {
 
     public static void main(String[] args){
         App exercise2 = new App();
-
+/*
         System.out.println("Task 1: Largest Number");
         exercise2.largestNumber();
 
@@ -187,12 +192,12 @@ public class App {
         exercise2.printPyramid();
 
         System.out.println("\nTask 4: Raute");
-        exercise2.printRhombus();
+        exercise2.printRhombus();*/
 
         System.out.println("\nTask 5: Notendurchschnitt");
         exercise2.marks();
 
-        System.out.println("\nTask 6: Fröhliche Zahlen");
-        exercise2.happyNumbers();
+       // System.out.println("\nTask 6: Fröhliche Zahlen");
+       // exercise2.happyNumbers();
     }
 }
